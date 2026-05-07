@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const urlDB = 'mongodb://localhost:27017/'
 const express = require('express');
+const path = require('node:path');
 const app = express(); 
 const port = process.env.PORT;
 const usersRoute = require("./usersRoute");
@@ -14,6 +15,11 @@ app.get('/api', (req, res) => {
 app.get(/.*test$/, function(req, res) {
   res.send('<h1>Entraste usando el patron test!</h1>');
 });
-  app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-  })
+app.use(express.static(path.join(__dirname, 'client/dist')))
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/dist/index.html'));
+})
+//app.listen(port, () => {
+//  console.log(`Example app listening on port ${port}`)
+//  })
+export default app
