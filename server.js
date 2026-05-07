@@ -14,10 +14,6 @@ app.get('/api', (req, res) => {
 app.get(/.*test$/, function(req, res) {
   res.send('<h1>Entraste usando el patron test!</h1>');
 });
-mongoose.connect(urlDB).then(()=>{
   app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
-  })}
-).catch(()=>{
-  console.dir("Ocurrio un error");
-})
+  })
